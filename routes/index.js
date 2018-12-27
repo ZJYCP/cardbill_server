@@ -33,7 +33,7 @@ router.get('/',async(ctx,next) => {
                             json: true
                         },(error,response,body)=>{
                 resolve(response.headers['set-cookie'])
-                // console.log(body)
+                // console.log(1)
 
             })
             })
@@ -60,14 +60,11 @@ router.get('/',async(ctx,next) => {
                     para.VIEWSTATEGENERATOR=$('input[name=__VIEWSTATEGENERATOR]').attr('value')
                     para.EVENTVALIDATION=$('input[name=__EVENTVALIDATION]').attr('value')
                     resolve(para)
+        // console.log(2)
         })
         })
 
     }
-
-// console.log(test)
-// console.log(result)
-// console.log(2)
 
 
     async function get_billdata(search_para) {
@@ -95,10 +92,8 @@ router.get('/',async(ctx,next) => {
                         },
                         body:formdata
                     },(error,response,body)=>{
-            // console.log(body)
-                        let $=cheerio.load(body)
-            // console.log(fruits)
-                        $('li').each(function(i, elem) {
+                         let $=cheerio.load(body)
+                         $('li').each(function(i, elem) {
                             fruits[i]=new Array()
                             fruits[i][0]=username
                             $(this).children('span').each(
@@ -113,7 +108,9 @@ router.get('/',async(ctx,next) => {
                         })
                         // console.log(fruits)
                     resolve(fruits)
-                })
+        // console.log(3)
+
+    })
         })
     }
     async function store_billdata(data) {
@@ -125,6 +122,7 @@ router.get('/',async(ctx,next) => {
                     // console.log(results.affectedRows)
                     // 结束会话
                     connection.release();
+            // console.log(4)
 
                     if(results.affectedRows) resolve(1)
                     // 如果有错误就抛出
@@ -154,35 +152,34 @@ Date.prototype.Format = function (fmt) { //author: meizz
 //
 // ctx.body= res.body;
 async function store_all() {
-    let start_date="2018-04-01 00:00:00"
-    for (let loop_time=1;loop_time<=3;loop_time++){
-
-        let end_date=new Date(new Date(start_date).getTime()+90*86400*1000).Format("yyyy-MM-dd hh:mm:ss")
-        // console.log(start_date)
-        // console.log(end_date)
-        let search_para=await get_para()
-        search_para.ctl00$ContentPlaceHolder1$StartDate=start_date
-        search_para.ctl00$ContentPlaceHolder1$EndDate=end_date
-        let data=await get_billdata(search_para)
-        await store_billdata(data)
-        start_date=new Date(new Date(end_date).getTime()+86400*1000).Format("yyyy-MM-dd hh:mm:ss")
-
-
-    }
+    // let start_date="2018-04-01 00:00:00"
+    // for (let loop_time=1;loop_time<=3;loop_time++){
+    //     let end_date=new Date(new Date(start_date).getTime()+90*86400*1000).Format("yyyy-MM-dd hh:mm:ss")
+    //     let search_para=await get_para()
+    //     search_para.ctl00$ContentPlaceHolder1$StartDate=start_date
+    //     search_para.ctl00$ContentPlaceHolder1$EndDate=end_date
+    //     let data=await get_billdata(search_para)
+    //     await store_billdata(data)
+    //     start_date=new Date(new Date(end_date).getTime()+86400*1000).Format("yyyy-MM-dd hh:mm:ss")
+    //     // console.log(5)
+    // }
+    ctx.body='99'
 }
 store_all()
 
-    ctx.body='99'
+    // ctx.body='99'
 }
 )
 
+///TODO 在入口对post账号验证是否已访问过，是的话页面重定向 阿
+// 数据分析 存入新表
 router.get('/string', async (ctx, next) => {
   ctx.body = 'koa2 string'
 })
 
-router.get('/json', async (ctx, next) => {
+router.post('/json', async (ctx, next) => {
   ctx.body = {
-    title: 'koa2 json'
+    title: ctx.request.body
   }
 })
 

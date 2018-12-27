@@ -8,6 +8,7 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const cors=require('koa2-cors')
 
 // error handler
 onerror(app)
@@ -18,6 +19,15 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
+app.use(cors({
+    origin: '*',
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    maxAge: 5,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE'], //设置允许的HTTP请求类型
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}));
+
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
