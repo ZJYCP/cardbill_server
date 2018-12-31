@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>2018年上海大学一卡通年度账单</title>
+  <link rel="stylesheet" href="./static/css/weui.min.css"/>
+  <style>
+    html,
+    body {
+      height: 100%;
+      min-height: 500px;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      background: url(./static/images/1.jpg) 0 0 / 100% 100% no-repeat;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .inputs {
+      width: 240px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .inputs>input {
+      width: 240px;
+      height: 44px;
+      margin-top: 1px;
+      border: 0;
+      outline: none;
+      background: rgba(248, 226, 182, .16);
+      box-sizing: border-box;
+      padding-left: 20px;
+    }
+
+    ::-webkit-input-placeholder {
+      color: #F8E2B6;
+    }
+
+    :-moz-placeholder {
+      color: #F8E2B6;
+    }
+
+    :-ms-input-placeholder {
+      color: #F8E2B6;
+    }
+
+    .login {
+      width: 220px;
+      height: 40px;
+      margin-left: 10px;
+      background: #F8E2B6;
+      border: 0;
+      border-radius: 20px;
+      outline: none;
+      font-size: 12px;
+      color: #D2332D;
+      margin-top: 14px;
+    }
+
+    .regist {
+      margin-top: 28px;
+      font-size: 12px;
+      color: #F8E2B6;
+      text-align: center;
+    }
+
+    .link {
+      color: #fff;
+    }
+    .remind{
+      color: #fff;
+    }
+
+    footer {
+      margin-top: 54px;
+    }
+
+    .year {
+      font-size: 18px;
+      color: #8B0202;
+    }
+
+    .pendant {
+      position: absolute;
+      left: 0;
+      box-sizing: border-box;
+      padding: 4px;
+      width: 100%;
+      z-index: -1;
+    }
+
+    .up {
+      top: 0;
+    }
+
+    .down {
+      bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <img class="pendant up" src="GreetingCard/static/img/p_up.png" alt="up">
+  <img class="pendant down" src="GreetingCard/static/img/p_down.png" alt="down">
+  <img id="header" src="GreetingCard/static/img/1111.png" alt="logo" width="210">
+  <section id="content" style="padding-top:0.4rem">
+    <section class="inputs">
+      <input id="username" type="text" placeholder="一卡通账号" autofocus />
+      <input id="password" type="password" placeholder="密码" />
+    </section>
+    <button class="login" onclick="login()">登录查看</button>
+    <section class="regist">
+      <span class="remind">我不会保留您的密码等隐私信息</span>
+        <br>
+      <a class="link"  href="https://github.com/ZJYCP/cardbill_server">项目源码 ></a>
+    </section>
+  </section>
+  <footer>
+    <img src="GreetingCard/static/img/p_chicken.png" alt="logo" width="170">
+  </footer>
+  <div id="loadingToast" style="display:none;">
+      <div class="weui-mask_transparent"></div>
+      <div class="weui-toast">
+          <i class="weui-loading weui-icon_toast"></i>
+          <p class="weui-toast__content">加载中,首次耗时较长</p>
+      </div>
+  </div>
+  <script>
+    function login() {
+      var $loadingToast = $('#loadingToast');
+      var username = document.querySelector('#username').value
+      var password = document.querySelector('#password').value
+      var url = 'http://localhost:3000'
+
+      var obj = {
+        username: username,
+        password: password
+      }
+      $loadingToast.fadeIn(100);
+        $.ajax({
+            url: 'http://localhost:3000/',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({obj}),
+            success: function(data) {
+                console.log(data)
+                if (data==1){
+                  $loadingToast.fadeOut(100)
+                  let new_url='http://localhost/index.html?username='+username
+                  window.location.replace(new_url)
+                }else if(data==-1){
+                  $loadingToast.fadeOut(100)
+                  weui.alert('用户名/密码错误或网络问题');
+                }else{
+                  $loadingToast.fadeOut(100)
+                  let new_url='http://localhost/index.html?username='+username
+                  window.location.replace(new_url)
+                }
+            }
+        })
+
+
+    }
+  </script>
+  <!--<script src="GreetingCard/lib/js/jweixin.js"></script>-->
+  <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.4/weui.min.js"></script>
+  <!--<script src="GreetingCard/dist/js/weixin.js"></script>-->
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+</body>
+
+</html>

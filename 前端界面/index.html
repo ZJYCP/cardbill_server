@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no,email=no"/>
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="yes" name="apple-touch-fullscreen">
+<meta name="keywords" content=""/>
+<meta name="description" content="年度账单"/>
+<base href="">
+<link rel="shortcut icon" href="./static/images/favicon.ico">
+<link rel="stylesheet" href="./static/css/h5-fullscreen.css">
+<link rel="stylesheet" href="./static/css/animate.css">
+<link rel="stylesheet" href="./static/css/bill.css">
+<title>2018年度账单</title>
+</head>
+<body>
+<div class="loading-overlay">
+    <img src="./static/images/loading.svg">
+</div>
+<div class="fullscreen-page-wrap">
+    <div class="item item2">
+        <img src="./static/images/2019.png" alt="" class="animated" data-ani-name="bounceInDown"
+             data-ani-duration="1s" data-ani-delay="0s">
+        <div class="animated" data-ani-name="lightSpeedIn" data-ani-duration="1s" data-ani-delay="0.5s">
+            <h1>时间总是偷偷流逝</h1>
+            <h1>打开账单</h1>
+            <h1>这一年是不是过得不太一样</h1>
+        </div>
+        <div class="btn animated" data-ani-name="flipInY" data-ani-duration="1s" data-ani-delay="1.5s">上滑立即开启</div>
+    </div>
+    <div class="item item3" data-desc="总消费">
+        <div class="year-bill">
+            <h3 class="year animated" data-ani-name="zoomIn" data-ani-duration="1s" data-ani-delay="0s">2018
+                年</h3>
+            <h1 class="animated" data-ani-name="zoomInRight" data-ani-duration="1.5s" data-ani-delay="0.5s">我的年度总消费</h1>
+            <h2 class="amount animated" data-ani-name="zoomInLeft" data-ani-duration="1.5s" data-ani-delay="1s"
+                id="yearEarnings">0000
+                <span>元</span></h2>
+            <h3 class="invests animated" data-ani-name="zoomInRight" data-ani-duration="1.5s" data-ani-delay="1s">
+                消费<span id="yearInvests">000</span>笔</h3>
+            
+            <h3 class="saying animated" data-ani-name="zoomInUp" data-ani-duration="3s" data-ani-delay="0.5s">更懂得爱自己的你 </br>一定也有人更爱你</h3>
+        </div>
+        <div class="say animated" data-ani-name="flipInY" data-ani-duration="1s" data-ani-delay="3s"><b>“</b>
+            因一卡通2.0系统原因，数据取4月至12月 <b>”</b></div>
+    </div>
+    <div class="item item4">
+        <div class="boxround animated" data-ani-name="fadeInLeft" data-ani-duration="1.0s" data-ani-delay="0.1s">
+            <div class="inner">还记得<span class="onlinedata" id='early_date'>0000-00-00</span></br>
+                那天<span class="onlinedata" id="earlytime">00:00:00</span>我早早地起床</br>刷了<span class="onlinedata" id="earlymoney">money</span>元</div>
+            <div class="inner">深夜<span class="onlinedata" id="latetime">00:00:00</span><br>
+                我仍心心念念地消费了<span class="onlinedata" id="latemoney">000</span>元<br>
+                那天是<span class="onlinedata" id="latedate">0000-00-00</span></div>
+        </div>
+        <div class="say animated" data-ani-name="flipInY" data-ani-duration="1s" data-ani-delay="0s" ><b>“</b>
+            最为祖国的花骨朵儿 一定要注意休息! <b>”</b></div>
+    </div>
+
+    <div class="item item4">
+            <div class="boxround animated" data-ani-name="fadeInLeft" data-ani-duration="1.0s" data-ani-delay="0.1s">
+                <div class="inner">这一年<br>
+                    通过微信、支付宝共充值了<br>
+                    <span class="onlinedata" id="recharge">0000</span>元
+                </div>
+            </div>
+            <div class="say animated" data-ani-name="flipInY" data-ani-duration="1s" data-ani-delay="0s"><b>“</b>
+                ??和消费有出入 难道有人偷偷地在给我充值 <b>”</b></div>
+    </div>
+
+    <div class="item item5">
+        <img src="./static/images/pig.png" alt="猪" class="animated" data-ani-name="bounceInDown"
+             data-ani-duration="1s" data-ani-delay="0s">
+        <ul>
+            <li class="animated" data-ani-name="fadeInLeft" data-ani-duration="1s" data-ani-delay="1s">
+                <span id="mostbilldate">0000-00-00 00:00:00 </span> 那天我大手一挥<br>
+                刷了有史以来做多的一笔<span id="mostbillmoney">000</span>元
+            </li>
+            <li class="animated" data-ani-name="fadeInRight" data-ani-duration="1s" data-ani-delay="1s">
+                <span id="daymostmoney">0000</span>元,这是我单日消费之最<br>
+                发生在<span id="daymostdate">0000-00-00 </span>    </li>
+            <!-- <li class="animated" data-ani-name="fadeInUp" data-ani-duration="1s" data-ani-delay="1s" style="text-align:center">
+                土豪了一次???
+            </li> -->
+        </ul>
+        <div class="chart animated" data-ani-name="fadeInUp" data-ani-duration="1s" data-ani-delay="1s"></div>
+        <div class="say animated" data-ani-name="flipInY" data-ani-duration="1s" data-ani-delay="2s"><b>“</b>
+            高档如您，不掩饰豪气，也追求多面 <b>”</b></div>
+    </div>
+
+
+
+    <div class="item item4">
+        <div class="boxround animated" data-ani-name="fadeInLeft" data-ani-duration="1.0s" data-ani-delay="0.1s"  >
+            <div class="inner">浴室扣款<span class="onlinedata" id="shower">0000</span>元</div>
+            <div class="inner">校医院扣款<span class="onlinedata" id="hospital">0000</span>元</div>
+            <div class="inner">图书馆超期扣款<span class="onlinedata" id="libary">000</span>元</div>
+            <div class="inner" style="font-size: 0.1rem; color: rgb(134, 134, 134);letter-spacing:0.03rem;margin-bottom: 0.1rem">再小也是钱</div>
+        </div>
+        <div class="say animated" data-ani-name="flipInY" data-ani-duration="1s" data-ani-delay="0s" ><b>“</b>
+            积小成多! <b>”</b></div>
+    </div>
+
+    <div class="item item6">
+        <div class="leading animated" data-ani-name="bounceInDown" data-ani-duration="1s" data-ani-delay="0s">
+              
+            <h1 class=" animated" data-ani-name="bounceIn" data-ani-duration="1s" data-ani-delay="0.5s">恭喜！</h1>
+              <!-- <div id="pie"></div> -->
+            <!-- <img src="./static/images/bill6-icon.png" alt="" class=" animated" data-ani-name="fadeIn"
+                 data-ani-duration="1s" data-ani-delay="1s"> -->
+            <h3 class=" animated" data-ani-name="lightSpeedIn" data-ani-duration="1s" data-ani-delay="0.5s">您的年度消费在上海大学排名</h3>
+            <h2 class=" animated" data-ani-name="lightSpeedIn" data-ani-duration="1s" data-ani-delay="0.5s" id="leadings">
+                第 <span id="rank">1</span>
+                </h2>
+                
+            <h3 class=" animated" data-ani-name="lightSpeedIn" data-ani-duration="1s" data-ani-delay="0.5s" style="font-size:0.16rem; margin-top: 0.2rem;color: rgb(134,134,134)">参考为该应用使用人数,半小时更新一次</h3>
+        </div>
+        <div id="piechart" style="width: 88%;height:40%; margin:0.3rem auto 0 auto"></div>
+        <div class="say animated" data-ani-name="flipInY" data-ani-duration="1s" data-ani-delay="0s"><b>“</b>
+            继续滑动，预测我的2019<b>”</b></div>
+    </div>
+    <div class="item item7">
+        <div class="leading animated" data-ani-name="fadeIn" data-ani-duration="3s" data-ani-delay="0s">
+            <div class="key_title">我的年度关键词
+                
+            </div>
+            <span style="font-size:0.2rem;color:rgb(134,134,134)">AI智能预测你的2019</span> 
+            <!-- 放心，没有ＡＩ -->
+            <img src="./static/images/final.jpg" alt="">
+            <div style="font-size:0.8rem;margin-bottom: 0.2rem">旺</div>
+            <div style="font-size:0.27rem;color: rgb(134,134,134)">2019年，事业旺，学业旺，好运旺，一年旺旺旺</div>
+        </div>
+
+        <div class="bottom_share animated" data-ani-name="lightSpeedIn" data-ani-duration="1s" data-ani-delay="1s">
+            <div class="share" id="share">分享此的账单</div>
+            <div class="scan">
+                <img src="./static/images/qrcode.png" alt=""><br>
+                <span class="scan_text">长按扫码获取我的账单</span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="overlay"></div>
+<script src="./static/js/jquery-3.1.1.js"></script>
+   <script src="./GreetingCard/lib/js/jweixin.js"></script>
+  <script src="./GreetingCard/dist/js/weixin.js"></script>
+
+<script type="text/javascript" src="./static/js/h5-fullscreen.js" defer async="true"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts-en.common.min.js" defer async="true"></script>
+<script type="text/javascript" src="./static/js/bill.js" defer async="true"></script>
+<script type="text/javascript">
+    $(function () {
+// console.log($(e).index())
+//             if ($(e).index() == 7) {
+               
+//             }
+        //给返回首页修改密码按钮添加单击事件
+
+            // $('.share').click(function(){
+            //     console.log('111')
+            // })
+})
+  </script>
+<!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js" defer async="true"></script> -->
+
+
+</body>
+</html>
