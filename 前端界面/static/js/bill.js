@@ -163,6 +163,8 @@ $(document).ready(function () {
      let str = url_para.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
      let strs = str.split("=");  //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
      let username=strs[1]
+      username=username.substr(0,8)
+     console.log(username)
      $.ajax({
         url: 'http://localhost:3000/json',
         type: 'POST',
@@ -179,17 +181,25 @@ $(document).ready(function () {
                 else $('#yearInvests').text(total[i])
             }
             let early=JSON.parse(data.early)
-            let earlydate=new Date(early.date).Format("yyyy年MM月dd日")
-            let earlytime=new Date(early.date).toLocaleTimeString()
+            let early_=(early.date).split(' ')
+            // let date=early_[0].substr(0,4)
+            // console.log(date)
+            let earlydate=early_[0].substr(0,4)+'年'+early_[0].substr(5,2)+'月'+early_[0].substr(8,2)+'日'
+            let earlytime=early_[1]
+            // let earlydate=new Date(early.date).Format("yyyy年MM月dd日")  部分浏览器无法显示
+            // let earlytime=new Date(early.date).toLocaleTimeString()
             // console.log(early)
             $('#early_date').text(earlydate)
             $('#earlytime').text(earlytime)
             $('#earlymoney').text(early.amount)
 
             let late=JSON.parse(data.later)
+            let late_=(late.date).split(' ')
             // console.log(late)
-            let latedate=new Date(late.date).Format("yyyy年MM月dd日")
-            let latetime=new Date(late.date).Format("hh:mm:ss")
+            let latedate=late_[0].substr(0,4)+'年'+late_[0].substr(5,2)+'月'+late_[0].substr(8,2)+'日'
+            let latetime=late_[1]
+            // let latedate=new Date(late.date).Format("yyyy年MM月dd日")
+            // let latetime=new Date(late.date).Format("hh:mm:ss")
             $('#latedate').text(latedate)
             $('#latetime').text(latetime)
             $('#latemoney').text(late.amount)

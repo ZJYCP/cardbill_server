@@ -11,8 +11,7 @@ router.post('/',async(ctx,next) => {
     let password=ctx.request.body.obj.password
 
 
-    // let username='16122175';
-    // let password='ZJqYCP0310';
+
 
     const pool  = mysql.createPool({
         host     : '127.0.0.1',   // 数据库地址
@@ -134,7 +133,7 @@ router.post('/',async(ctx,next) => {
                                 }
                             )
                         })
-                        // console.log(fruits)
+                        console.log(fruits)
                     resolve(fruits)
         // console.log(3)
 
@@ -147,12 +146,12 @@ router.post('/',async(ctx,next) => {
                 let sql_query="insert into bill(`username`,`usage`,`date`,`amount`) VALUES "+connection.escape(data)
                 // console.log(sql_query)
                 connection.query(sql_query,  (error, results, fields) => {
-                    // console.log(results.affectedRows)
+                    console.log(error)
                     // 结束会话
                     connection.release();
             // console.log(4)
 
-                    if(results.affectedRows) resolve(1)
+                    if(results) resolve(1)
                     // 如果有错误就抛出
                     else if (error) rejects(error);
                 })
@@ -188,7 +187,11 @@ async function store_all() {
         search_para.ctl00$ContentPlaceHolder1$StartDate=start_date
         search_para.ctl00$ContentPlaceHolder1$EndDate=end_date
         let data=await get_billdata(search_para)
-        await store_billdata(data)
+        console.log(data)
+        if(data.length != 0){
+            await store_billdata(data)
+        }
+
         start_date=new Date(new Date(end_date).getTime()+86400*1000).Format("yyyy-MM-dd hh:mm:ss")
 
     }
@@ -292,9 +295,10 @@ router.post('/json', async (ctx, next) => {
     // console.log(ctx.request.body)
     let username=ctx.request.body.username
     console.log(username)
-    let data_rank="UPDATE cardbill.analysed SET `rank`=(SELECT b.rownum FROM(SELECT t.*, @rownum := @rownum + 1 AS rownum FROM (SELECT @rownum := 0) r,(SELECT * FROM cardbill.analysed ORDER BY IC DESC) AS t) AS b WHERE b.username = "+username+ ") where username="+username
-    let search_query=data_rank+";"+"select * from analysed where username="+username
+    let data_rank="UPDATE cardbill.analysed SET `rank`=(SELECT b.rownum FROM(SELECT t.*, @rownum := @rownum + 1 AS rownum FROM (SELECT @rownum := 0) r,(SELECT * FROM cardbill.analysed ORDER BY IC DESC ) AS t) AS b WHERE b.username = "+username+" ORDER BY IC asc limit 1"+ ") where username="+username
+    let search_query=data_rank+";"+"select * from analysed where username="+username+' order by IC asc limit 1'
     let data=''
+console.log(search_query)
 
     async function search_data() {
         return new Promise((resolve,rejects)=>{
@@ -302,7 +306,7 @@ router.post('/json', async (ctx, next) => {
             connection.query(search_query,  (error, results, fields) => {
                 connection.release();
             if(results) {
-                console.log(results)
+                console.log(search_query)
                 resolve(results[1])
             }
             // 如果有错误就抛出
