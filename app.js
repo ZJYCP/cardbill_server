@@ -28,11 +28,11 @@ app.use(cors({
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
 
-app.use(require('koa-static')(__dirname + '/public'))
-
-app.use(views(__dirname + '/views', {
-  extension: 'pug'
-}))
+// app.use(require('koa-static')(__dirname + '/public'))
+//
+// app.use(views(__dirname + '/views', {
+//   extension: 'pug'
+// }))
 
 // logger
 app.use(async (ctx, next) => {

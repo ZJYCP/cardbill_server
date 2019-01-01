@@ -152,6 +152,16 @@
         password: password
       }
       $loadingToast.fadeIn(100);
+      console.log('diyici',$.cookie("has_send"))
+      if($.cookie("has_send")){
+        setTimeout(() => {
+          let new_url='http://localhost/index.html?username='+username
+            window.location.replace(new_url)
+        }, 2000);
+
+      }else{
+        $.cookie("has_send",1);
+
         $.ajax({
             url: 'http://localhost:3000/',
             type: 'POST',
@@ -173,14 +183,18 @@
                 }
             }
         })
+      }
+
 
 
     }
   </script>
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+      <script src="./static/js/jquery.cookie.js"></script>
   <!--<script src="GreetingCard/lib/js/jweixin.js"></script>-->
   <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.4/weui.min.js"></script>
   <!--<script src="GreetingCard/dist/js/weixin.js"></script>-->
-  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  
 
 </body>
 
